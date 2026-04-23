@@ -22,4 +22,13 @@
 
 
 ?>
-<title>CI527 - API Server</title>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>CI527 - API Server</title>
+    </head>
+    <body>
+        <h1>CI527 - Web Application Development</h1>
+        <p>Assessment 2 - REST API Server</p>
+    </body>
