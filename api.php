@@ -1,5 +1,5 @@
 <?php
-    // Connection to the PHP Database within brighton domains
+    // Connection to the PHP Database within brighton domains with mysqli method
     Class Database {
         private $servername = "brighton";
         private $username = "msp53_test";
@@ -20,6 +20,20 @@
         }
     }
 
+    if(isset($_POST["objId"]) && isset($_POST["name"]) && isset($_POST["comment"])) {
+        // Assinging paramters with variables 
+        $objId = $_POST["objId"];
+        $name = $_POST["name"];
+        $comment = $_POST["comment"];
+
+        // Data validation
+        $len = strlen($name);
+        if ($len < 1 || $len > 64){
+            $html = "<p>Name must be between 1 and 64 characters</p>";
+        }
+        
+    }
+
 
 ?>
 <!DOCTYPE html>
@@ -32,3 +46,4 @@
         <h1>CI527 - Web Application Development</h1>
         <p>Assessment 2 - REST API Server</p>
     </body>
+</html>
