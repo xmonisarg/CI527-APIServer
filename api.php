@@ -60,21 +60,28 @@
 
         // Data validation
         $len = strlen($name);
-        if ($len < 1 || $len > 64){
-            $this->respond = "<p>Name must be between 1 and 64 characters</p>";
+        if (($len < 1 || $len > 64)) { // min length is 1, max length is 64
+            $this->status=400;
+            return;
         }
         $len = strlen($comment);
-        if ($len < 1 || $len > 255){
-            $this->respond = "<p>Comment must be between 1 and 255 characters</p>";
+        if ($len < 1 ) { // min length is 1
+            $this->status=400;
+            return;
         }
-        if (! ctype_alnum($objId)) {
-            
-        }}
-
-    
+        $len = strlen($objId);
+        if (! ctype_alnum($objId) || $len > 32) { // alphanumeric check for objId
+            $this->status=400;
+            return;
+        }
     }
 
-    private function handleGet() {}
+
+    }
+
+    private function handleGet() {
+
+    }
 
 
 ?>
