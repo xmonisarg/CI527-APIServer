@@ -61,18 +61,20 @@
         // Data validation
         $len = strlen($name);
         if ($len < 1 || $len > 64){
-            $html = "<p>Name must be between 1 and 64 characters</p>";
+            $this->respond = "<p>Name must be between 1 and 64 characters</p>";
         }
         $len = strlen($comment);
         if ($len < 1 || $len > 255){
-            $html = "<p>Comment must be between 1 and 255 characters</p>";
+            $this->respond = "<p>Comment must be between 1 and 255 characters</p>";
         }
         if (! ctype_alnum($objId)) {
             
         }}
 
-        
+    
     }
+
+    private function handleGet() {}
 
 
 ?>
