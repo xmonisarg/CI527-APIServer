@@ -7,7 +7,7 @@
         private $dbname = "msp53_ci527-assign2";
         public $conn;
 
-        public function connect() {
+        public function __construct()() {
             $this->conn = new mysqli(
                 $this->servername, 
                 $this->username, 
@@ -17,6 +17,10 @@
             if ($this->conn->connect_error) {
                 die("Connection failed: " . $this->conn->connect_error);
             }
+        }
+
+        public function __destruct() {
+            $this->conn->close();
         }
     }
 
