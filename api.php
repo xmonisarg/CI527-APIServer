@@ -100,6 +100,10 @@ class Database
         }
     }
 
+    public function execute($sql)
+    {
+        return $this->conn->query($sql);
+    }
 }
 
 ?>
