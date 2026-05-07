@@ -101,6 +101,10 @@ class Database
             or die("Error: " . mysqli_error($this->conn));
     }
 
+    public function execute($sql)
+    {
+        return $this->conn->query($sql);
+    }
 }
 
 ?>
