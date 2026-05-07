@@ -49,11 +49,11 @@ class RestAPI {
                 break;
             default:
                 $this->status = 405;
-                break;
-                http_response_code($this->status);
                 echo $this->respond;
+                break;
+            }
+            http_response_code($this->status);
         }
-    }
 
     private function handlePost()
     {
@@ -113,7 +113,7 @@ class RestAPI {
                 }
                 echo json_encode($rows);
             } else {
-                $this->status = 204;
+                $this->status = 204; // if there is 0 rows, then it will return 204 no content code.
             }
            }
     }
