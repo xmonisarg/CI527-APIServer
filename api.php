@@ -101,21 +101,27 @@ class RestAPI {
             // execute mysqli query and format the response with status code with json format.
         } if ($this->status == 200) {
             $stmt = $this->conn->prepare("SELECT * FROM comments WHERE oid=?");
-            $stmt->bind_param("s", $obid);
+            $stmt->bind_param("s", $oid);
             $stmt->execute();
 
             $result = $stmt->get_result();
 
             if ($result->num_rows > 0) {
-                $rows = [];
+                $comments = [];
                 while ($row = $result->fetch_assoc()) {
-                    $rows['curDate'] = date('d F Y', strtotime($row['curDate'])); // format date to "day month year"
-                    $rows[] = $row;
-
+                    $comment = [
+                        "id" => $row['id'],
+                        "date" => date('d F Y', strtotime($row['curDate'])), // format date to "day month year"
+                        "name" => $row['name'],
+                        "comment" => $row['comment']
+                    ];
+                    $comments[] = $comment;
                 }
-                echo json_encode($rows);
+                echo json_encode($comments);
             } else {
                 $this->status = 204; // if there is 0 rows, then it will return 204 no content code.
+            } else {
+                $this->status = 400; // bad request, if no parameter provided.
             }
            }
     }
