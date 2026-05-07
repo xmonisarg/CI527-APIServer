@@ -1,14 +1,13 @@
 <?php
 // Connection to the PHP Database within brighton domains with mysqli method
-class Database
-{
+class RestAPI {
     private $servername = "brighton";
     private $username = "msp53_test";
     private $password = "Str0ngPassword!";
     private $dbname = "msp53_ci527-assign2";
     public $conn;
 
-    private $status;
+    private $status = null;
 
     private $respond;
 
@@ -22,8 +21,9 @@ class Database
         );
 
         if ($this->conn->connect_error) {
-            die("Connection failed: " . $this->conn->connect_error);
             $this->status = 500;
+            exit;
+            
         }
     }
 
@@ -95,17 +95,33 @@ class Database
             if (!ctype_alnum($objId) || $len > 32) { // alphanumeric check for objId
                 $this->status = 400;
                 return;
+            } else {
+                $this->status = 400; // bad request, if no parameter provided.
             }
             // execute mysqli query and format the response with status code with json format.
-        } mysqli_query($this->conn, "SELECT * FROM comments WHERE objId='$objId'")
-            or die("Error: " . mysqli_error($this->conn));
+        } if ($this->status == 200) {
+            $stmt = $this->conn->prepare("SELECT * FROM comments WHERE objId=?");
+            $stmt->bind_param("s", $objId);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $rows = [];
+                while ($row = $result->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+                echo json_encode($rows);
+            } else {
+                $this->status = 204;
+            }
+           }
     }
 
-    public function execute($sql)
-    {
-        return $this->conn->query($sql);
-    }
 }
+
+    $api = new API();
+    $api->handleRequest();
 
 ?>
 
