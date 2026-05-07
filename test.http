@@ -1,10 +1,10 @@
-GET https://msp53.brighton.domains/ci527/assignment2/api.php?oid=1
+## Post Request
 
-###
+POST https://msp53.brighton.domains/ci527/assignment2/api.php HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
 
-POST https://msp53.brighton.domains/ci527/assignment2/api.php?oid=1
-Content-Type: application/json
+oid=AB123456X&name=John&comment=Hello this is a test
 
-{
-    "oid": 1
-}
+### Get Request
+
+GET https://msp53.brighton.domains/ci527/assignment2/api.php?oid=AB123456X HTTP/1.1

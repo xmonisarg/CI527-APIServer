@@ -1,7 +1,7 @@
 <?php
 // Connection to the PHP Database within brighton domains with mysqli method
 class RestAPI {
-    private $servername = "brighton";
+    private $servername = "locahost";
     private $username = "msp53_test";
     private $password = "Str0ngPassword!";
     private $dbname = "msp53_ci527-assign2";
@@ -100,7 +100,7 @@ class RestAPI {
             }
             // execute mysqli query and format the response with status code with json format.
         } if ($this->status == 200) {
-            $stmt = $this->conn->prepare("INSERT INTO tComment (oid, name, comment, curDate) VALUES (?)");
+            $stmt = $this->conn->prepare("SELECT * FROM tComment WHERE oid=? ORDER BY curDate ASC");
             $stmt->bind_param("s", $oid);
             $stmt->execute();
 
