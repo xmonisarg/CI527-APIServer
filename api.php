@@ -122,7 +122,7 @@ class RestAPI {
 
 }
 
-    $api = new API();
+    $api = new RestAPI();
     $api->handleRequest();
 
 ?>
