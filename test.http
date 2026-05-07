@@ -3,8 +3,8 @@
 POST https://msp53.brighton.domains/ci527/assignment2/api.php HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
-oid=AB123456X&name=John&comment=Hello this is a test
+oid=CD7890XDX&name=Monica&comment=Test2
 
 ### Get Request
 
-GET https://msp53.brighton.domains/ci527/assignment2/api.php?oid=AB123456X HTTP/1.1
+GET https://msp53.brighton.domains/ci527/assignment2/api.php?oid=CD7890XDX HTTP/1.1

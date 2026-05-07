@@ -1,7 +1,7 @@
 <?php
 // Connection to the PHP Database within brighton domains with mysqli method
 class RestAPI {
-    private $servername = "locahost";
+    private $servername = "brighton";
     private $username = "msp53_test";
     private $password = "Str0ngPassword!";
     private $dbname = "msp53_ci527-assign2";
@@ -80,6 +80,15 @@ class RestAPI {
                 $this->status = 400;
                 return;
             }
+
+            $stmt = $this->conn->prepare("INSERT INTO tComment (oid, name, comment) VALUES (?, ?, ?)");
+            $stmt->bind_param("sss", $oid, $name, $comment);
+
+            if ($stmt->execute()) {
+                $this->status = 201; // created
+            } else {
+                $this->status = 500; // internal server error
+            }
         }
 
 
@@ -93,10 +102,10 @@ class RestAPI {
 
             $len = strlen($oid);
             if (!ctype_alnum($oid) || $len > 32) { // alphanumeric check for obid
-                $this->status = 400;
+                $this->status = 400; // bad request, if no parameter provided.
                 return;
             } else {
-                $this->status = 400; // bad request, if no parameter provided.
+                $this->status = 200; 
             }
             // execute mysqli query and format the response with status code with json format.
         } if ($this->status == 200) {
@@ -120,8 +129,6 @@ class RestAPI {
                 echo json_encode($comments);
             } else {
                 $this->status = 204; // if there is 0 rows, then it will return 204 no content code.
-            } else {
-                $this->status = 400; // bad request, if no parameter provided.
             }
            }
     }
