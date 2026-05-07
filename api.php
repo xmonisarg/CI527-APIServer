@@ -97,9 +97,15 @@ class Database
                 return;
             }
             // execute mysqli query and format the response with status code with json format.
-        }
+        } mysqli_query($this->conn, "SELECT * FROM comments WHERE objId='$objId'")
+            or die("Error: " . mysqli_error($this->conn));
     }
 
 }
 
 ?>
+
+<!-- References
+ 1. https://www.php.net/manual/en/mysqli.execute-query.php
+ 2. https://www.php.net/manual/en/mysqli.error.php
+-->
