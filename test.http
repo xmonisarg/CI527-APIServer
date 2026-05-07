@@ -1,0 +1,10 @@
+GET https://msp53.brighton.domains/ci527/assignment2/api.php?id=1
+
+###
+
+POST https://msp53.brighton.domains/ci527/assignment2/api.php
+Content-Type: application/json
+
+{
+    "id": 1
+}
