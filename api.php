@@ -58,9 +58,9 @@ class RestAPI {
     private function handlePost()
     {
 
-        if (isset($_POST["objId"]) && isset($_POST["name"]) && isset($_POST["comment"])) {
+        if (isset($_POST["oid"]) && isset($_POST["name"]) && isset($_POST["comment"])) {
             // Assinging paramters with variables 
-            $objId = $_POST["objId"];
+            $oid = $_POST["oid"];
             $name = $_POST["name"];
             $comment = $_POST["comment"];
 
@@ -75,8 +75,8 @@ class RestAPI {
                 $this->status = 400;
                 return;
             }
-            $len = strlen($objId);
-            if (!ctype_alnum($objId) || $len > 32) { // alphanumeric check for objId
+            $len = strlen($oid);
+            if (!ctype_alnum($oid) || $len > 32) { // alphanumeric check for oid
                 $this->status = 400;
                 return;
             }
@@ -87,12 +87,12 @@ class RestAPI {
 
     private function handleGet()
     {
-        if (isset($_GET["objId"])) {
+        if (isset($_GET["oid"])) {
 
-            $objId = $_GET["objId"];
+            $oid = $_GET["oid"];
 
-            $len = strlen($objId);
-            if (!ctype_alnum($objId) || $len > 32) { // alphanumeric check for objId
+            $len = strlen($oid);
+            if (!ctype_alnum($oid) || $len > 32) { // alphanumeric check for obid
                 $this->status = 400;
                 return;
             } else {
@@ -100,8 +100,8 @@ class RestAPI {
             }
             // execute mysqli query and format the response with status code with json format.
         } if ($this->status == 200) {
-            $stmt = $this->conn->prepare("SELECT * FROM comments WHERE objId=?");
-            $stmt->bind_param("s", $objId);
+            $stmt = $this->conn->prepare("SELECT * FROM comments WHERE oid=?");
+            $stmt->bind_param("s", $obid);
             $stmt->execute();
 
             $result = $stmt->get_result();
@@ -124,7 +124,6 @@ class RestAPI {
 
     $api = new RestAPI();
     $api->handleRequest();
-
 ?>
 
 <!-- References
