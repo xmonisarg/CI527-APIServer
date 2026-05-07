@@ -100,7 +100,7 @@ class RestAPI {
             }
             // execute mysqli query and format the response with status code with json format.
         } if ($this->status == 200) {
-            $stmt = $this->conn->prepare("SELECT * FROM comments WHERE oid=?");
+            $stmt = $this->conn->prepare("INSERT INTO tComment (oid, name, comment, curDate) VALUES (?)");
             $stmt->bind_param("s", $oid);
             $stmt->execute();
 
@@ -113,7 +113,7 @@ class RestAPI {
                         "id" => $row['id'],
                         "date" => date('d F Y', strtotime($row['curDate'])), // format date to "day month year"
                         "name" => $row['name'],
-                        "comment" => $row['comment']
+                        "comment" => $row['commentId']
                     ];
                     $comments[] = $comment;
                 }
