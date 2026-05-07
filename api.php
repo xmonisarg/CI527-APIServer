@@ -109,7 +109,9 @@ class RestAPI {
             if ($result->num_rows > 0) {
                 $rows = [];
                 while ($row = $result->fetch_assoc()) {
+                    $rows['curDate'] = date('d F Y', strtotime($row['curDate'])); // format date to "day month year"
                     $rows[] = $row;
+
                 }
                 echo json_encode($rows);
             } else {
